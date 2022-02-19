@@ -1,4 +1,4 @@
-Mankiw, N. Gregory, David Romer, and David N. Weil. (1992):
+# Mankiw, N. Gregory, David Romer, and David N. Weil. (1992):
 1. In this model, output is produced from physical capital, human capital, and labor, and is used for investment in physical capital, 
 investment in human capital, and 
 consumption. One production function that is consistent with our empirical results is Y=K^1/3 H^1/3 L^1/3
