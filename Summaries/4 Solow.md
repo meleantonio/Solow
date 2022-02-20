@@ -1,0 +1,1 @@
+# Solow, R., "A Contribution to the Theory of Economic Growth", Quarterly Journal of Economics, February, 1956

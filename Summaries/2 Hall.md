@@ -1,0 +1,1 @@
+# Hall, Robert, and Charles I. Jones. "Why Do Some Countries Produce So Much More Output per Worker than Others?" The Quarterly Journal of Economics 114, no. 1 (1999): 83–116
