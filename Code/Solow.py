@@ -11,7 +11,7 @@ class Solow:
     self.L = L_0 # 'L' is the total level of labour in the economy, K_0 being the inital value
     self.Y = self.K ** a * (self.A * self.L) ** (1 - self.a) # The output level of the Solow model economy
     self.I = s * self.Y # 'I' is the investment level when a rate s of total level of capital is saved, I_0 is the inital value
-
+    
   # Todo: A function that permanently changes the capital after one time step
   def capital_next_period(self):
     return self
