@@ -12,6 +12,7 @@ class Solow:
     self.Y = self.K ** self.a * (self.A * self.L) ** (1 - self.a) # The output level of the Solow model economy
     self.I = self.s * self.Y # 'I' is the investment level when a rate s of total level of capital is saved
     self.C = (1 - self.s) * self.Y # 'C' is the aggregate consumption level
+    self.D = self.d * self.K # 'D' is the aggregate depreciation level
     self.ke = self.K / (self.A * self.L) # 'ke' is the level of capital per effective unit of labour
     self.k = self.K / self.L # 'k' (lowercase) is the level of perworker capital
     self.y = self.Y / self.L # 'y' (lowercase) is the level of perworker output
@@ -26,7 +27,7 @@ class Solow:
 
   # A function that gives the change in the aggregate capital for one time step
   def capital_change(self):
-    return self.s * self.Y - self.d * self.K
+    return self.I - self.D
 
   # A function that changes the capital for one time step
   def update_capital(self):
@@ -71,6 +72,14 @@ class Solow:
   # A function that updates the consumption
   def update_consumption(self):
     self.C += self.consumption_change()
+
+  # A function that gives the change in the aggregate depreciation level for one time step
+  def depreciation_change(self):
+    return self.d * self.K - self.D
+
+  # A function that updates the depreciation
+  def update_depreciation(self):
+    self.D += self.depreciation_change()
 
   # A function that gives the change in the level of capital per effective unit of labour
   def capital_per_effective_labour_change(self):
@@ -133,6 +142,7 @@ class Solow:
     # Getting other variable changes
     investment_change = self.investment_change()
     consumption_change = self.consumption_change()
+    depreciation_change = self.depreciation_change()
 
     capital_per_effective_labour_change = self.capital_per_effective_labour_change()
     capital_per_capita_change = self.capital_per_capita_change()
@@ -143,6 +153,7 @@ class Solow:
     # Updating other variable changes
     self.update_investment()
     self.update_consumption()
+    self.update_depreciation()
 
     self.update_capital_per_effective_labour()
     self.update_capital_per_capita()
@@ -151,15 +162,15 @@ class Solow:
     self.update_consumption_per_capita()
 
     # Returning a row of data to be inserted in the dataset of the simulation
-    return [self.Y, self.K, self.A, self.L, self.I, self.C, output_change, capital_change, tfp_change, labour_change, investment_change, consumption_change, self.y, self.ke, self.k, self.i, self.c, output_per_capita_change, capital_per_effective_labour_change, capital_per_capita_change, investment_per_capita_change, consumption_per_capita_change]
+    return [self.Y, self.K, self.A, self.L, self.I, self.C, self.D, output_change, capital_change, tfp_change, labour_change, investment_change, consumption_change, depreciation_change, self.y, self.ke, self.k, self.i, self.c, output_per_capita_change, capital_per_effective_labour_change, capital_per_capita_change, investment_per_capita_change, consumption_per_capita_change]
 
   def simulate(self, steps):
     title = f'Solow model simulation with the parameter values of a={self.a}, g={self.g}, n={self.n}, d={self.d}, s={self.s}.'
-    dataset = [['Output', 'Capital', 'TFP', 'Labour', 'Investment', 'Consumption', 'Output Change', 'Capital Change', 'TFP Change', 'Labour Change', 'Investment Change', 'Output / Capita', 'Capital / Effective Labour', 'Capital / Capita', 'Investment / Capita', 'Consumption / Capita', 'Capital / Effective Labour Change', 'Output / Capita Change', 'Capital / Effective Labour Change', 'Capital / Capita Change', 'Investment / Capita Change', 'Consumption / Capita Change']]
+    dataset = [['Output', 'Capital', 'TFP', 'Labour', 'Investment', 'Consumption', 'Depreciation', 'Output Change', 'Capital Change', 'TFP Change', 'Labour Change', 'Investment Change', 'Consumption Change', 'Depreciation Change', 'Output / Capita', 'Capital / Effective Labour', 'Capital / Capita', 'Investment / Capita', 'Consumption / Capita', 'Output / Capita Change', 'Capital / Effective Labour Change', 'Capital / Capita Change', 'Investment / Capita Change', 'Consumption / Capita Change']]
     dataset.append([self.Y, self.K, self.A, self.L, self.I, self.C, 0, 0, 0, 0, 0, 0, self.y, self.ke, self.k, self.i, self.c, 0, 0, 0, 0, 0])
     for i in range(steps):
       dataset.append(self.step())
-    return dataset
+    return title, dataset
   
   # A function that permanently updates the parameter values that are put in
   def update_parameters(self, a=None, g=None, n=None, d=None, s=None, K=None, A=None, L=None):    
