@@ -9,10 +9,10 @@ class Solow:
     self.K = K_0 # 'K' is the total capital in the economy, L_0 being the initial value
     self.A = A_0 # 'A' is the total tfp of the economy, A_0 being the initial value   
     self.L = L_0 # 'L' is the total level of labour in the economy, K_0 being the inital value
-    self.Y = self.K ** a * (self.A * self.L) ** (1 - self.a) # The output level of the Solow model economy
-    self.I = s * self.Y # 'I' is the investment level when a rate s of total level of capital is saved, I_0 is the inital value
+    self.Y = self.K ** self.a * (self.A * self.L) ** (1 - self.a) # The output level of the Solow model economy
+    self.I = self.s * self.Y # 'I' is the investment level when a rate s of total level of capital is saved, I_0 is the inital value
     
-  # Todo: A function that permanently changes the capital after one time step
+  # Todo: A function that changes the capital after one time step
   def capital_next_period(self):
     return self
 
@@ -20,7 +20,7 @@ class Solow:
   def labour_next_period(self):
     return self
   
-  # A function that updates the parameter values that are put in
+  # A function that permanently updates the parameter values that are put in
   def update(self, a=None, g=None, n=None, d=None, s=None, K=None, A=None, L=None):    
     # If the argument is not none, change the parameter value of the class
     if a:
