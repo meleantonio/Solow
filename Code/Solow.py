@@ -1,42 +1,23 @@
 # This file will contain the class for the Solow model
 class Solow:
   def __init__(self, a, g, n, d, s, K_0, A_0, L_0):
-    # 'a' is the share of output that will be attributed to capital, '(1 - a)' will be that attributed to 
-    self.a = a
-    
-    # 'g' is the growth rate of tfp per time period
-    self.g = g
-    
-    # 'n' is the population growth rate 
-    self.n = n
+    self.a = a # 'a' is the share of output that will be attributed to capital, '(1 - a)' will be that attributed to effective labour 
+    self.g = g # 'g' is the growth rate of tfp per time period
+    self.n = n # 'n' is the population growth rate 
+    self.d = d # 'd' is the year to year depreciation rate of capital 
+    self.s = s # 's' is the saving rate
+    self.K = K_0 # 'K' is the total capital in the economy, L_0 being the initial value
+    self.A = A_0 # 'A' is the total tfp of the economy, A_0 being the initial value   
+    self.L = L_0 # 'L' is the total level of labour in the economy, K_0 being the inital value
+    self.Y = self.K ** a * (self.A * self.L) ** (1 - self.a) # The output level of the Solow model economy
+    self.I = s * self.Y # 'I' is the investment level when a rate s of total level of capital is saved, I_0 is the inital value
 
-    # 'd' is the year to year depreciation rate of capital 
-    self.d = d
-    
-    # 's' is the saving rate
-    self.s = s
-
-    # 'K' is the total capital in the economy, L_0 being the initial value
-    self.K = K
-    
-    # 'A' is the total tfp of the economy, A_0 being the initial value
-    self.A = A
-    
-    # 'L' is the total level of labour in the economy, K_0 being the inital value
-    self.L = L
-
-    # The output level of the Solow model economy
-    self.Y = K ** a * (A * L) ** (1 - a)
-
-    # 'I' is the investment level when a rate s of total level of capital is saved, I_0 is the inital value
-    self.I = s * self.Y
-
-  # Todo: A function that changes the capital after one time step
-  def capital(self):
+  # Todo: A function that permanently changes the capital after one time step
+  def capital_next_period(self):
     return self
 
   # Todo: A function that changes the labour after one time step
-  def labour(self):
+  def labour_next_period(self):
     return self
   
   # A function that updates the parameter values that are put in
