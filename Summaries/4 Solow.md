@@ -1,5 +1,5 @@
 # Solow, R., "A Contribution to the Theory of Economic Growth", Quarterly Journal of Economics, February, 1956
 This is the paper introducing the classic Solow model.
 In this paper, they use a different definition of the total factor productivity (Solow residual) than the one used in the introductory macroeconomic countries at LSE.
-Diminishing returns to capital can set in slowly for high levels of the alfa.
-Output converges faster than income because borrowing is easier than lending and so the output is captured by richer countries abroad. Incomes for the people themselves will not reach that level at the same time, for that reason, but later. As an additional comment, this might not be true in reality (also related to reading 2) that the marginal product of capital is actually a lot lower because of institutional differences, etc.
+Diminishing returns to capital can set in slowly for high levels of the alfa .
+Output converges faster than income because borrowing is easier than lending and so the output is captured by richer countries abroad. Incomes for the people themselves will not reach that level at the same time, for that reason, but later. As an additional comment, this might not be true in reality (also related to reading 2) that the marginal product of capital is actually a lot lower because of institutional differences, etc. Accross countries these differences are generally higher than within countries due to the fact that institutions are similar in quality, facilitating higher capital flows here.
