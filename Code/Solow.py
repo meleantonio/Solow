@@ -25,7 +25,7 @@ class Solow:
     # 'L' is the total level of labour in the economy, K_0 being the inital value
     self.L = L
 
-    # The Solow model economy output
+    # The output level of the Solow model economy
     self.Y = K ** a * (A * L) ** (1 - a)
 
     # 'I' is the investment level when a rate s of total level of capital is saved, I_0 is the inital value
