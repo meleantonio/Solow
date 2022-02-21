@@ -167,7 +167,7 @@ class Solow:
   def simulate(self, steps):
     title = f'Solow model simulation with the parameter values of a={self.a}, g={self.g}, n={self.n}, d={self.d}, s={self.s}.'
     dataset = [['Output', 'Capital', 'TFP', 'Labour', 'Investment', 'Consumption', 'Depreciation', 'Output Change', 'Capital Change', 'TFP Change', 'Labour Change', 'Investment Change', 'Consumption Change', 'Depreciation Change', 'Output / Capita', 'Capital / Effective Labour', 'Capital / Capita', 'Investment / Capita', 'Consumption / Capita', 'Output / Capita Change', 'Capital / Effective Labour Change', 'Capital / Capita Change', 'Investment / Capita Change', 'Consumption / Capita Change']]
-    dataset.append([self.Y, self.K, self.A, self.L, self.I, self.C, 0, 0, 0, 0, 0, 0, self.y, self.ke, self.k, self.i, self.c, 0, 0, 0, 0, 0])
+    dataset.append([self.Y, self.K, self.A, self.L, self.I, self.C, self.D, 0, 0, 0, 0, 0, 0, 0, self.y, self.ke, self.k, self.i, self.c, 0, 0, 0, 0, 0])
     for i in range(steps):
       dataset.append(self.step())
     return title, dataset
