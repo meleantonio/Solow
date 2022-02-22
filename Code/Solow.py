@@ -26,7 +26,7 @@ class Solow:
         print('Great, you will have sustained economic growth!')
 
     self.country = country
-    self.years = [starting_year]
+    self.years = [str(starting_year)]
 
   # A function that adds the new period values to the class property arrays
   def step(self):
@@ -43,7 +43,7 @@ class Solow:
     self.C.append((1 - self.s) * self.Y[-1])
     self.D.append(self.d * self.K[-1])
 
-    self.years.append(self.years[-1] + 1)
+    self.years.append(str(int(self.years[-1]) + 1))
 
   def simulate(self, steps, shock_year=-1, a=None, g=None, n=None, d=None, s=None, K=None, A=None, L=None):
     title = f'Solow model simulation with the initial parameter values of a={self.a}, g={self.g}, n={self.n}, d={self.d}, s={self.s}.'
@@ -56,7 +56,7 @@ class Solow:
     return {'title': title, 'header': ['Country', 'Years', 'Output', 'Capital', 'Investment', 'Consumption', 'Depreciation'], 'dataset': self.dataset()}
   
   # A function that permanently updates the parameter values that are put in
-  def update_parameters(self, a, g, n, d, s, K, A):    
+  def update_parameters(self, a, g, n, d, s, K, A, L):    
     # If the argument is not none, change the parameter value of the class
     if a:
       self.a = a
