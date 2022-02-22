@@ -1,6 +1,6 @@
 # This file contains the class for the Solow model
 class Solow:
-  def __init__(self, a=1/3, g=0, n=0, d=0.02, s=0.1, K_0=1, A_0=1, L_0=1):
+  def __init__(self, a=1/3, g=0, n=0, d=0.02, s=0.1, K_0=1, A_0=1, L_0=1, country='Zombieland', starting_year=2022):
     # Parameter values
     self.a = a                                                                    # 'a' is the share of output that will be attributed to capital, '(1 - a)' will be that attributed to effective labour 
     self.g = g                                                                    # 'g' is the growth rate of tfp per time period
@@ -25,6 +25,9 @@ class Solow:
       if s > 0 and K_0 > 0 and A_0 > 0 and L_0 > 0:
         print('Great, you will have sustained economic growth!')
 
+    self.country = country
+    self.years = [starting_year]
+
   # A function that adds the new period values to the class property arrays
   def step(self):
     # Adding the new period values for the properties that are used to calculate output
@@ -40,6 +43,8 @@ class Solow:
     self.C.append((1 - self.s) * self.Y[-1])
     self.D.append(self.d * self.K[-1])
 
+    self.years.append(self.years[-1] + 1)
+
   def simulate(self, steps, shock_year=-1, a=None, g=None, n=None, d=None, s=None, K=None, A=None, L=None):
     title = f'Solow model simulation with the initial parameter values of a={self.a}, g={self.g}, n={self.n}, d={self.d}, s={self.s}.'
     # Adding the new property values for each year in the simulation
@@ -48,7 +53,7 @@ class Solow:
       if i == shock_year:
         self.update_parameters(a, g, n, d, s, K, A, L)
       self.step()
-    return {'title': title, 'header': ['Output', 'Capital', 'Investment', 'Consumption', 'Depreciation'], 'dataset': self.dataset()}
+    return {'title': title, 'header': ['Country', 'Years', 'Output', 'Capital', 'Investment', 'Consumption', 'Depreciation'], 'dataset': self.dataset()}
   
   # A function that permanently updates the parameter values that are put in
   def update_parameters(self, a, g, n, d, s, K, A):    
@@ -74,7 +79,7 @@ class Solow:
   def dataset(self):
     dataset = []
     for i in range(len(self.Y)):
-      dataset.append([self.Y[i], self.K[i], self.I[i], self.C[i], self.D[i]])
+      dataset.append([self.country, self.years[i], self.Y[i], self.K[i], self.I[i], self.C[i], self.D[i]])
     return dataset
 
   # Return the per capita array of that put in
