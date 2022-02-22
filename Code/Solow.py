@@ -53,7 +53,7 @@ class Solow:
       if i == shock_year:
         self.update_parameters(a, g, n, d, s, K, A, L)
       self.step()
-    return {'title': title, 'header': ['Country', 'Years', 'Output', 'Capital', 'Investment', 'Consumption', 'Depreciation'], 'dataset': self.dataset()}
+    return {'title': title, 'header': ['Country', 'Year', 'Output', 'Capital', 'Investment', 'Consumption', 'Depreciation'], 'dataset': self.dataset()}
   
   # A function that permanently updates the parameter values that are put in
   def update_parameters(self, a, g, n, d, s, K, A, L):    
