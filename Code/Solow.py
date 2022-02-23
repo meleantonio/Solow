@@ -17,16 +17,19 @@ class Solow:
     self.C = [(1 - self.s) * self.Y[0]]                                           # 'C' is the aggregate consumption level
     self.D = [self.d * self.K[0]]                                                 # 'D' is the aggregate depreciation level
 
-    self.k_star = 0
+    self.country = country
+    self.years = [starting_year]
+
+  # A function returning the steady state level of capital per effecitve labour
+  def steady_state(self):
+    ke_star = 0
     # Checking if we don't divide by zero
     try: 
-      self.k_star = (self.s / (self.g + self.n + self.d + self.g * self.n)) ** (1 / (1 - self.a)) # 'k_star' is the steady state level of per worker capital, where capital in the next period is equal to capital in the current period
+      ke_star = (self.s / (self.g + self.n + self.d + self.g * self.n)) ** (1 / (1 - self.a)) # 'ke_star' is the steady state level of per worker capital, where capital in the next period is equal to capital in the current period
     except:
-      if s > 0 and K_0 > 0 and A_0 > 0 and L_0 > 0:
-        print('Great, you will have sustained economic growth!')
-
-    self.country = country
-    self.years = [str(starting_year)]
+      if s > 0 and self.K[-1] > 0 and self.A[-1] > 0 and self.L[-1] > 0:
+        print('Congratulations, you will have sustained economic growth!')
+    return ke_star
 
   # A function that adds the new period values to the class property arrays
   def step(self):
@@ -43,7 +46,7 @@ class Solow:
     self.C.append((1 - self.s) * self.Y[-1])
     self.D.append(self.d * self.K[-1])
 
-    self.years.append(str(int(self.years[-1]) + 1))
+    self.years.append(self.years[-1] + 1)
 
   def simulate(self, steps, shock_year=-1, a=None, g=None, n=None, d=None, s=None, K=None, A=None, L=None):
     title = f'Solow model simulation with the initial parameter values of a={self.a}, g={self.g}, n={self.n}, d={self.d}, s={self.s}.'
@@ -75,11 +78,12 @@ class Solow:
     if L:
       self.L = L
 
-  # Return an array from the class that can be used to quickly create a dataset
+  # Return an array from the class that can be used to quickly create a pandas dataframe
   def dataset(self):
     dataset = []
     for i in range(len(self.Y)):
-      dataset.append([self.country, self.years[i], self.Y[i], self.K[i], self.I[i], self.C[i], self.D[i]])
+      dataset.append([self.
+      country, self.years[i], self.Y[i], self.K[i], self.I[i], self.C[i], self.D[i]])
     return dataset
 
   # Return the per capita array of that put in
