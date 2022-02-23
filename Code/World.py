@@ -4,7 +4,7 @@ class World:
     self.countries = countries
     self.datasets = []
 
-  # A function that can be used to create animated plots
+  # A function that returns an array that can be used to create animated plots
   @staticmethod
   def animation_dataset(data, starting_year):
     animation_dataset = []
@@ -22,4 +22,4 @@ class World:
     for i in range(len(self.countries)):
       dataset += self.countries[i].simulate(steps, shock_year, a, g, n, d, s, K, A, L)['dataset']
     animation_dataset = self.animation_dataset(dataset, self.countries[0].years[0])
-    return {'title': 'Simulating the world', 'header': ['Country', 'Year', 'Output', 'Capital', 'Investment', 'Consumption', 'Depreciation', 'Up To'], 'animation_dataset': animation_dataset}
+    return {'title': 'Simulating the world', 'header': ['Country Iso', 'Year', 'Output', 'Capital', 'Investment', 'Consumption', 'Depreciation', 'Up To'], 'animation_dataset': animation_dataset}

@@ -1,6 +1,6 @@
 # This file contains the class for the Solow model
 class Solow:
-  def __init__(self, a=1/3, g=0, n=0, d=0.02, s=0.1, K_0=1, A_0=1, L_0=1, country='Zombieland', starting_year=2022):
+  def __init__(self, a=1/3, g=0, n=0, d=0.02, s=0.1, K_0=1, A_0=1, L_0=1, country_iso='Zombieland', starting_year=2022):
     # Parameter values
     self.a = a                                                                    # 'a' is the share of output that will be attributed to capital, '(1 - a)' will be that attributed to effective labour 
     self.g = g                                                                    # 'g' is the growth rate of tfp per time period
@@ -17,7 +17,7 @@ class Solow:
     self.C = [(1 - self.s) * self.Y[0]]                                           # 'C' is the aggregate consumption level
     self.D = [self.d * self.K[0]]                                                 # 'D' is the aggregate depreciation level
 
-    self.country = country
+    self.country_iso = country_iso
     self.years = [starting_year]
 
   # A function returning the steady state level of capital per effecitve labour
@@ -27,7 +27,7 @@ class Solow:
     try: 
       ke_star = (self.s / (self.g + self.n + self.d + self.g * self.n)) ** (1 / (1 - self.a)) # 'ke_star' is the steady state level of per worker capital, where capital in the next period is equal to capital in the current period
     except:
-      if s > 0 and self.K[-1] > 0 and self.A[-1] > 0 and self.L[-1] > 0:
+      if self.s > 0 and self.K[-1] > 0 and self.A[-1] > 0 and self.L[-1] > 0:
         print('Congratulations, you will have sustained economic growth!')
     return ke_star
 
@@ -56,7 +56,7 @@ class Solow:
       if i == shock_year:
         self.update_parameters(a, g, n, d, s, K, A, L)
       self.step()
-    return {'title': title, 'header': ['Country', 'Year', 'Output', 'Capital', 'Investment', 'Consumption', 'Depreciation'], 'dataset': self.dataset()}
+    return {'title': title, 'header': ['Country Iso', 'Year', 'Output', 'Capital', 'Investment', 'Consumption', 'Depreciation'], 'dataset': self.dataset()}
   
   # A function that permanently updates the parameter values that are put in
   def update_parameters(self, a, g, n, d, s, K, A, L):    
@@ -83,7 +83,7 @@ class Solow:
     dataset = []
     for i in range(len(self.Y)):
       dataset.append([self.
-      country, self.years[i], self.Y[i], self.K[i], self.I[i], self.C[i], self.D[i]])
+      country_iso, self.years[i], self.Y[i], self.K[i], self.I[i], self.C[i], self.D[i]])
     return dataset
 
   # Return the per capita array of that put in
